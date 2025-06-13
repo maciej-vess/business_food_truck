@@ -208,9 +208,10 @@ if not st.session_state.day_complete:
                         st.session_state.day_complete = True
 
 # Finalny blok — przeskakiwanie dnia lub zakończenie
+        
 if st.session_state.day_complete:
     if st.session_state.day < st.session_state.max_days:
-        if result.get("Typ") != "Raport":
+        if result.get("Typ") != "Raport rynkowy":
             st.write("### Wynik dnia")
             st.json(result)
             st.session_state.day += 1
