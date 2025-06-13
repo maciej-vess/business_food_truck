@@ -11,7 +11,7 @@ if "day" not in st.session_state:
     st.session_state.day = 1
     st.session_state.cash = 10000
     st.session_state.history = []
-    st.session_state.max_days = 35  # 5 tygodni * 7 dni
+    st.session_state.max_days = 35
     st.session_state.day_complete = False
     st.session_state.mode = None
     st.session_state.foodtruck_days_left = 0
@@ -99,7 +99,7 @@ if not st.session_state.day_complete:
         prod = st.session_state.foodtruck_product
         demand = get_pair_demand(loc, prod)
         sold = min(demand, 150)
-        profit = sold * (20 - 8)
+        profit = sold * 12
         st.session_state.cash += profit
         result = {
             "Dzień": st.session_state.day,
@@ -125,7 +125,7 @@ if not st.session_state.day_complete:
             if submitted:
                 demand = get_pair_demand(loc, prod)
                 sold = min(int(demand * 0.3), 50)
-                profit = sold * (20 - 8)
+                profit = sold * 12
                 st.session_state.cash += profit
                 result = {
                     "Dzień": st.session_state.day,
@@ -182,6 +182,7 @@ if not st.session_state.day_complete:
                                 "Zysk": -cost // 7,
                                 "Gotówka": st.session_state.cash,
                             })
+                        st.session_state.day += 7
                         st.session_state.day_complete = True
                     elif choice == "Food Truck":
                         st.session_state.foodtruck_days_left = 7
@@ -194,7 +195,7 @@ if not st.session_state.day_complete:
                         st.session_state.mode = "Trolley"
                         demand = get_pair_demand(loc, prod)
                         sold = min(int(demand * 0.3), 50)
-                        profit = sold * (20 - 8)
+                        profit = sold * 12
                         st.session_state.cash += profit
                         result = {
                             "Dzień": st.session_state.day,
@@ -209,19 +210,18 @@ if not st.session_state.day_complete:
                         st.session_state.day_complete = True
 
 if st.session_state.day_complete:
-    st.write("### Wynik dnia")
-    st.json(result)
-
     if st.session_state.day < st.session_state.max_days:
-        st.session_state.day += 1
+        if result.get("Typ") != "Raport":
+            st.write("### Wynik dnia")
+            st.json(result)
         st.session_state.day_complete = False
         if st.session_state.foodtruck_days_left == 0 and st.session_state.trolley_days_left == 0:
             st.session_state.mode = None
             st.session_state.choice_selected = None
+        st.session_state.day += 1
         st.rerun()
     else:
-        st.success("Gra zakończona!")
+        st.success(f"🎉 Gra zakończona! Końcowy stan gotówki: {st.session_state.cash} zł")
         df_hist = pd.DataFrame(st.session_state.history)
         st.write("### Historia decyzji")
         st.dataframe(df_hist)
-        st.write(f"Końcowy stan gotówki: {st.session_state.cash} zł")
