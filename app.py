@@ -180,7 +180,7 @@ if not st.session_state.day_complete:
                                 "Zysk": -cost // 7,
                                 "Gotówka": st.session_state.cash,
                             })
-                        st.session_state.day += 7
+                        st.session_state.day += 6
                         st.session_state.day_complete = True
                     elif choice == "Food Truck":
                         st.session_state.foodtruck_days_left = 7
