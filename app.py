@@ -52,7 +52,6 @@ products = {
     "🍧 Mrożony jogurt": "Mrożony jogurt",
     "🥤 Shake owocowy": "Shake owocowy"
 }
-
 week = (st.session_state.day - 1) // 7 + 1
 weekday = (st.session_state.day - 1) % 7 + 1
 st.subheader(f"Tydzień {week}, dzień {weekday}")
@@ -92,7 +91,6 @@ if st.session_state.history:
     st.plotly_chart(fig, use_container_width=True)
 
 result = {}
-
 if not st.session_state.day_complete:
     if st.session_state.foodtruck_days_left > 0:
         loc = st.session_state.foodtruck_location
@@ -209,16 +207,17 @@ if not st.session_state.day_complete:
                         st.session_state.history.append(result)
                         st.session_state.day_complete = True
 
+# Finalny blok — przeskakiwanie dnia lub zakończenie
 if st.session_state.day_complete:
     if st.session_state.day < st.session_state.max_days:
         if result.get("Typ") != "Raport":
             st.write("### Wynik dnia")
             st.json(result)
+            st.session_state.day += 1
         st.session_state.day_complete = False
         if st.session_state.foodtruck_days_left == 0 and st.session_state.trolley_days_left == 0:
             st.session_state.mode = None
             st.session_state.choice_selected = None
-        st.session_state.day += 1
         st.rerun()
     else:
         st.success(f"🎉 Gra zakończona! Końcowy stan gotówki: {st.session_state.cash} zł")
