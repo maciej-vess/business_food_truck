@@ -20,12 +20,12 @@ if "day" not in st.session_state:
     st.session_state.trolley_days_left = 0
     st.session_state.foodtruck_days_left = 0
     st.session_state.base_demand = {
-        "Centrum": 160,
-        "Kampus": 140,
-        "Dworzec": 120,
-        "Plaża": 180,
-        "Targowisko": 100,
-        "Dzielnica Sztuki": 110
+        "Centrum": 140,
+        "Kampus": 160,
+        "Dworzec": 100,
+        "Plaża": 150,
+        "Targowisko": 120,
+        "Dzielnica Sztuki": 120
     }
     st.session_state.pair_demand = {}
     st.session_state.last_report = ""
@@ -56,14 +56,14 @@ base_demand = {
 }
 
 product_location_weights = {
-    "Centrum": {"Lody": 0.8, "Mrożony jogurt": 1.3, "Shake owocowy": 1.4},             # profesjonaliści
-    "Kampus": {"Lody": 0.7, "Mrożony jogurt": 1.5, "Shake owocowy": 1.6},              # studenci
-    "Park": {"Lody": 1.0, "Mrożony jogurt": 1.2, "Shake owocowy": 1.3},                # rodziny
-    "Stadion": {"Lody": 1.8, "Mrożony jogurt": 0.6, "Shake owocowy": 1.0},             # eventy, dzieci
-    "Dworzec": {"Lody": 0.6, "Mrożony jogurt": 1.0, "Shake owocowy": 1.6},             # dorośli dojeżdżający
+    "Centrum": {"Lody": 0.9, "Mrożony jogurt": 1.3, "Shake owocowy": 1.4},             # profesjonaliści
+    "Kampus": {"Lody": 0.7, "Mrożony jogurt": 1.5, "Shake owocowy": 1.4},              # studenci
+    "Park": {"Lody": 1.0, "Mrożony jogurt": 1.4, "Shake owocowy": 1.3},                # rodziny
+    "Stadion": {"Lody": 1.6, "Mrożony jogurt": 0.6, "Shake owocowy": 1.0},             # eventy, dzieci
+    "Dworzec": {"Lody": 0.6, "Mrożony jogurt": 1.2, "Shake owocowy": 1.6},             # dorośli dojeżdżający
     "Plaża": {"Lody": 1.6, "Mrożony jogurt": 1.3, "Shake owocowy": 1.2},               # dzieci + studenci
-    "Targowisko": {"Lody": 1.5, "Mrożony jogurt": 1.0, "Shake owocowy": 0.8},          # starsze pary
-    "Dzielnica Sztuki": {"Lody": 1.4, "Mrożony jogurt": 1.3, "Shake owocowy": 0.9},    # dzieci + pary
+    "Targowisko": {"Lody": 1.3, "Mrożony jogurt": 1.0, "Shake owocowy": 0.8},          # starsze pary
+    "Dzielnica Sztuki": {"Lody": 1.4, "Mrożony jogurt": 1.5, "Shake owocowy": 0.9},    # dzieci + pary
 }
 
 
@@ -279,7 +279,7 @@ with tab2:
     st.header("🚶‍♀️ Ruch pieszy wg lokalizacji (2015)")
     df_traffic = pd.DataFrame({
         "Lokalizacja": ["Dworzec", "Centrum", "Kampus", "Targowisko", "Dzielnica Sztuki", "Plaża"],
-        "Średni ruch dzienny": [19432, 14170, 9247, 8582, 7091, 3120]
+        "Średni ruch dzienny": [19432, 16170, 10247, 8592, 10091, 4120]
     })
     fig_traffic = px.bar(df_traffic, x="Lokalizacja", y="Średni ruch dzienny", title="Ruch pieszy wg lokalizacji")
     st.plotly_chart(fig_traffic, use_container_width=True)
@@ -297,9 +297,9 @@ with tab2:
     st.header("📊 Sprzedaż wg grup demograficznych (2016)")
     df_demo = pd.DataFrame({
         "Grupa wiekowa": ["Dzieci", "Młodzi dorośli", "Dorośli", "Seniorzy"],
-        "Lody": [470, 362, 278, 346],
-        "Mrożony jogurt": [194, 387, 306, 154],
-        "Smoothie": [135, 221, 243, 132]
+        "Lody": [470, 382, 278, 326],
+        "Mrożony jogurt": [244, 387, 306, 254],
+        "Smoothie": [185, 211, 243, 162]
     })
     st.dataframe(df_demo)
 
