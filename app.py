@@ -57,7 +57,7 @@ base_demand = {
 
 product_location_weights = {
     "Centrum": {"Lody": 0.9, "Mrożony jogurt": 1.3, "Shake owocowy": 1.4},             # profesjonaliści
-    "Kampus": {"Lody": 0.7, "Mrożony jogurt": 1.5, "Shake owocowy": 1.4},              # studenci
+    "Kampus": {"Lody": 0.9, "Mrożony jogurt": 1.5, "Shake owocowy": 1.4},              # studenci
     "Park": {"Lody": 1.0, "Mrożony jogurt": 1.4, "Shake owocowy": 1.3},                # rodziny
     "Stadion": {"Lody": 1.6, "Mrożony jogurt": 0.6, "Shake owocowy": 1.0},             # eventy, dzieci
     "Dworzec": {"Lody": 0.6, "Mrożony jogurt": 1.2, "Shake owocowy": 1.6},             # dorośli dojeżdżający
